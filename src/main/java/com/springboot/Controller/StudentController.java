@@ -2,13 +2,13 @@ package com.springboot.Controller;
 
 import com.springboot.Entity.Student;
 import com.springboot.Service.StudentService;
+
+import java.awt.*;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -31,5 +31,15 @@ public class StudentController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteStudentById(@PathVariable("id") int id){
          studentService.removeStudentById(id);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void updateStudent(@RequestBody Student student){
+        studentService.updateStudent(student);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void insertStudents(@RequestBody Student student){
+        studentService.insertStudent(student);
     }
 }
